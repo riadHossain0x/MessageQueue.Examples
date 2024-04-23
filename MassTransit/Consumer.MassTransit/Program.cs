@@ -28,6 +28,18 @@ builder.Services.AddMassTransit(config =>
     });
 });
 
+//builder.Services.AddMassTransit(config =>
+//{
+//    var entryAssembly = Assembly.GetExecutingAssembly();
+//    config.AddConsumers(entryAssembly!);
+
+//    config.UsingRabbitMq((ctx, cfg) =>
+//    {
+//        cfg.Host("amqp://guest:guest@localhost:5672");
+//        cfg.ConfigureEndpoints(ctx);
+//    });
+//});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
