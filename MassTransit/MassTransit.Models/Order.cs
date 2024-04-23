@@ -1,6 +1,6 @@
 ﻿namespace MassTransit.Models;
 
-//[EntityName("produce")]
+[EntityName("produce")]
 public class Order
 {
     public int Id { get; set; }

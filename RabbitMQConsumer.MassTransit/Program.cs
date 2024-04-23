@@ -1,6 +1,8 @@
 using MassTransit;
+using MassTransit.Configuration;
 using MassTransit.Models;
 using RabbitMQ.Client;
+using RabbitMQConsumer.MassTransit;
 using RabbitMQConsumer.MassTransit.Consumers;
 using System.Reflection;
 
@@ -27,7 +29,7 @@ builder.Services.AddMassTransit(config =>
         {
             x.ConfigureConsumeTopology = false;
             x.AutoDelete = true;
-            x.Consumer<OrderConsumer>();
+            x.M2Consumer<OrderConsumer>(() => { return new OrderConsumer(builder.Services.BuildServiceProvider()!); }, null);
             x.Bind("order-exchange", s =>
             {
                 s.ExchangeType = ExchangeType.Fanout;
