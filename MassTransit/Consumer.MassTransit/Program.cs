@@ -21,10 +21,10 @@ builder.Services.AddMassTransit(config =>
     {
         cfg.Host("amqp://guest:guest@localhost:5672");
         cfg.ConfigureEndpoints(ctx);
-        //cfg.ReceiveEndpoint("order-queue", c =>
-        //{
-        //    c.ConfigureConsumer<OrderConsumer>(ctx);
-        //});
+        cfg.ReceiveEndpoint("order-queue", c =>
+        {
+            c.ConfigureConsumer<OrderConsumer>(ctx);
+        });
     });
 });
 
