@@ -28,8 +28,8 @@ builder.Services.AddMassTransit(config =>
         cfg.ReceiveEndpoint($"order-queue-{Guid.NewGuid()}", x =>
         {
             x.ConfigureConsumeTopology = false;
-            x.AutoDelete = true;
-            x.M2Consumer<OrderConsumer>(() => { return new OrderConsumer(builder.Services.BuildServiceProvider()!); }, null);
+            x.AutoDelete = false;
+            x.M2Consumer<OrderConsumer>(() => { return new OrderConsumer(builder.Services.BuildServiceProvider()!); }, c => c.UseMessageRetry(r => r.Interval(2, 500)));
             x.Bind("order-exchange", s =>
             {
                 s.ExchangeType = ExchangeType.Fanout;

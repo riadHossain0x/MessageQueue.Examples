@@ -14,6 +14,7 @@ public class OrderConsumer : IConsumer<Order>
 
     public async Task Consume(ConsumeContext<Order> context)
     {
+        throw new Exception("Error!");
         await Console.Out.WriteLineAsync(context.Message.Name);
     }
 }
